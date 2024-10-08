@@ -22,6 +22,9 @@ jobs:
           REMOTE_HOST: ${{secrets.SSH_HOST}}
           REMOTE_USER: ${{secrets.USER_NAME }}
           TARGET: "/home/ubutnu/app"
+
+
+          
         
             
         
