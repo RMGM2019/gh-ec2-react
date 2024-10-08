@@ -15,13 +15,14 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Deploy to my EC2 instance
-        uses: easingthemes/ssh-deploy@v2.1.5
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+        uses: easingthemes/ssh-deploy@v5.1.0
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KE }}
           SOURCE: "./"
           REMOTE_HOST: ${{secrets.SSH_HOST}}
           REMOTE_USER: "ubuntu"
           TARGET: "/home/ubuntu/app"
+          EXCLUDE: "/node_modules/"
 
 
 
