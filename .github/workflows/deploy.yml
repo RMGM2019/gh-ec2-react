@@ -24,7 +24,7 @@ jobs:
           TARGET: "/home/ubuntu/app"
           EXCLUDE: "/node_modules/"
 
-      - name: Build and Deploy
+      - name: Build and Deploy        
         env:
           PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           HOSTNAME: ${{secrets.SSH_HOST}}
@@ -35,8 +35,9 @@ jobs:
 
               # Now we have got the access of EC2 and we will start the deploy .
               cd /home/ubuntu/app &&
-              docker-compose up 
-              '
+              docker-compose up -d
+            '      
+          
 
 
 
