@@ -24,5 +24,19 @@ jobs:
           TARGET: "/home/ubuntu/app"
           EXCLUDE: "/node_modules/"
 
+      - name: Build and Deploy
+        env:
+          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          HOSTNAME: ${{secrets.SSH_HOST}}
+          USER_NAME: ${{secrets.USER_NAME}}
+        run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+
+              # Now we have got the access of EC2 and we will start the deploy .
+              cd /home/ubuntu/app &&
+              docker-compose up
+              '
+
 
 
