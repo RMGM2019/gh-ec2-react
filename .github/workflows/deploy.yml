@@ -6,27 +6,22 @@ on:
       - master
 
 jobs:
-  Deploy:
-    name: Deploy to EC2
+  deploy:
+    name: Push to EC2 Instance
     runs-on: ubuntu-latest
-    
-    steps:
-      - name: Get code
-        uses: actions/checkout@v3  
 
-      - name: Move code SSH
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v1
+
+      - name: Deploy to my EC2 instance
         uses: easingthemes/ssh-deploy@v2.1.5
-        with:
-          SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           SOURCE: "./"
           REMOTE_HOST: ${{secrets.SSH_HOST}}
-          REMOTE_USER: ${{secrets.USER_NAME }}
-          TARGET: "/home/ubutnu/app"
+          REMOTE_USER: "ubuntu"
+          TARGET: "/home/ubuntu/app"
 
-
-          
-        
-            
-        
 
 
